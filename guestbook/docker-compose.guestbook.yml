@@ -1,0 +1,24 @@
+services:
+  server:
+    image: ghcr.io/dreamsofcode-io/guestbook/guestbook
+    container_name: guestbook
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.guestbook.rule=Host(`test.simonma.de`)"
+      - "traefik.http.routers.guestbook.entrypoints=websecure"
+      - "traefik.http.routers.guestbook.tls.certresolver=myresolver"
+    secrets:
+      - db-password
+    environment:
+      - POSTGRES_HOST=db
+      - POSTGRES_PASSWORD_FILE=/run/secrets/db-password
+      - POSTGRES_USER=postgres
+      - POSTGRES_DB=guestbook
+      - POSTGRES_PORT=5432
+      - POSTGRES_SSLMODE=disable
+    depends_on:
+      db:
+        condition: service_healthy
+    network:
+      - entry
+      - processing

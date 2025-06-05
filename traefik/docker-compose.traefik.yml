@@ -1,0 +1,39 @@
+services:
+  reverse-proxy:
+    # The official v3 Traefik docker image
+    container_name: traefik
+    image: traefik:latest
+    restart: unless-stopped
+    # Enables the web UI and tells Traefik to listen to docker
+    command: 
+      - --global.checkNewVersion=false
+      - --global.sendAnonymousUsage=false
+      - --providers.docker=true
+      - --providers.docker.exposedbydefault=false
+      - --log.level=INFO
+      - --accesslog.filters.statuscodes=400-499
+      - --api.dashboard=true
+      # Https entrypoints
+      - --entrypoints.web.address=:80
+      - --entrypoints.web.http.redirections.entrypoint.to=websecure
+      - --entrypoints.web.http.redirections.entrypoint.scheme=https
+      - --entrypoints.websecure.address=:443
+      - --certificatesresolvers.mydnschallenge.acme.email={E-MAIL}
+      - --certificatesresolvers.mydnschallenge.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.mydnschallenge.acme.httpchallenge.entrypoint=web
+    ports:
+      # The HTTP port
+      - "80:80"
+      # The Web UI
+      - "8080:8080"
+      # The HTTPS Port
+      - "443:443"
+    volumes:
+      # So that Traefik can listen to the Docker events
+      - /var/run/docker.sock:/var/run/docker.sock
+      # Traefik Let´s Encrypt Volume
+      - ./acme.json:/letsencrypt/acme.json
+
+    network:
+      - entry
+

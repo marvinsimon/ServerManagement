@@ -1,0 +1,9 @@
+volumes:
+  db-data:
+  letsencrypt:
+secrets:
+  db-password:
+    file: db/password.txt
+networks:
+  - entry
+  - processing
