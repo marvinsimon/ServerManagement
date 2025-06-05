@@ -4,6 +4,7 @@ services:
     container_name: traefik
     image: traefik:latest
     restart: unless-stopped
+    user: "1000:1000"
     # Enables the web UI and tells Traefik to listen to docker
     command: 
       - --global.checkNewVersion=false
@@ -33,7 +34,6 @@ services:
       - /var/run/docker.sock:/var/run/docker.sock
       # Traefik Let´s Encrypt Volume
       - ./acme.json:/letsencrypt/acme.json
-
     networks:
       - entry
 
