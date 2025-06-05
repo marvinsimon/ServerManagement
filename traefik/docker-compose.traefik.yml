@@ -34,6 +34,6 @@ services:
       # Traefik Let´s Encrypt Volume
       - ./acme.json:/letsencrypt/acme.json
 
-    network:
+    networks:
       - entry
 
