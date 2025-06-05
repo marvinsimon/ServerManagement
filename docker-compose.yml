@@ -5,5 +5,7 @@ secrets:
   db-password:
     file: db/password.txt
 networks:
-  - entry
-  - processing
+  entry:
+    name: Entry
+  processing:
+    name: processing
