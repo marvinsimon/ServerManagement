@@ -14,6 +14,16 @@ services:
       - "traefik.http.routers.kitchenowl.rule=Host(`your.domain.here`)"
       - "traefik.http.routers.kitchenowl.entrypoints=websecure"
       - "traefik.http.routers.kitchenowl.middlewares=security@docker" # Use to apply security middlewares
+      - "traefik.http.middlewares.security.headers.addvaryheader=true"
+      - "traefik.http.middlewares.security.headers.sslredirect=true"
+      - "traefik.http.middlewares.security.headers.browserxssfilter=true"
+      - "traefik.http.middlewares.security.headers.contenttypenosniff=true"
+      - "traefik.http.middlewares.security.headers.forcestsheader=true"
+      - "traefik.http.middlewares.security.headers.stsincludesubdomains=true"
+      - "traefik.http.middlewares.security.headers.stspreload=true"
+      - "traefik.http.middlewares.security.headers.stsseconds=63072000"
+      - "traefik.http.middlewares.security.headers.customframeoptionsvalue=SAMEORIGIN"
+      - "traefik.http.middlewares.security.headers.referrerpolicy=same-origin"
 
   back:
     image: tombursch/kitchenowl:latest
