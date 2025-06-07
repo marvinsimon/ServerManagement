@@ -1,0 +1,12 @@
+services:
+  actual_server:
+    image: docker.io/actualbudget/actual-server:latest
+    volumes:
+      - ./actual/data:/data
+    restart: unless-stopped
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.actual-server.rule=Host(`budget.mainlooped.dev`)"
+      - "traefik.http.routers.actual-server.entrypoints=websecure"
+      - "traefik.http.routers.guestbook.tls.certresolver=myresolver"
+      - "traefik.http.services.actual-server.loadbalancer.server.port=5006"
