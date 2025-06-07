@@ -22,6 +22,17 @@ services:
       - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
       - --certificatesresolvers.myresolver.acme.tlschallenge=true
 #     - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
+    labels:
+      - "traefik.http.middlewares.security.headers.addvaryheader=true"
+      - "traefik.http.middlewares.security.headers.sslredirect=true"
+      - "traefik.http.middlewares.security.headers.browserxssfilter=true"
+      - "traefik.http.middlewares.security.headers.contenttypenosniff=true"
+      - "traefik.http.middlewares.security.headers.forcestsheader=true"
+      - "traefik.http.middlewares.security.headers.stsincludesubdomains=true"
+      - "traefik.http.middlewares.security.headers.stspreload=true"
+      - "traefik.http.middlewares.security.headers.stsseconds=63072000"
+      - "traefik.http.middlewares.security.headers.customframeoptionsvalue=SAMEORIGIN"
+      - "traefik.http.middlewares.security.headers.referrerpolicy=same-origin"
     ports:
       # The HTTP port
       - "80:80"

@@ -1,0 +1,31 @@
+version: "3"
+
+services:
+  front:
+    image: tombursch/kitchenowl-web:latest
+    networks:
+      - entry
+      - processing
+    restart: unless-stopped
+    depends_on:
+      - back
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.kitchenowl.rule=Host(`your.domain.here`)"
+      - "traefik.http.routers.kitchenowl.entrypoints=websecure"
+      - "traefik.http.routers.kitchenowl.middlewares=security@docker" # Use to apply security middlewares
+
+  back:
+    image: tombursch/kitchenowl:latest
+    networks:
+      - default
+      - processing
+    restart: unless-stopped
+    environment:
+      - FRONT_URL=https://your.domain.here
+      - JWT_SECRET_KEY=PLEASE_CHANGE_ME
+    volumes:
+      - kitchenowl_data:/data
+
+volumes:
+  kitchenowl_data:
