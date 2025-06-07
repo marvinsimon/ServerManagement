@@ -10,3 +10,5 @@ services:
       - "traefik.http.routers.actual-server.entrypoints=websecure"
       - "traefik.http.routers.actual-server.tls.certresolver=myresolver"
       - "traefik.http.services.actual-server.loadbalancer.server.port=5006"
+    networks:
+      - entry
