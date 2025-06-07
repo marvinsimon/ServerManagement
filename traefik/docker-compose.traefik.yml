@@ -33,7 +33,7 @@ services:
       # So that Traefik can listen to the Docker events
       - /var/run/docker.sock:/var/run/docker.sock
       # Traefik Let´s Encrypt Volume
-      - ./acme.json:/letsencrypt/acme.json
+      - ./traefik/acme.json:/letsencrypt/acme.json
     networks:
       - entry
 
