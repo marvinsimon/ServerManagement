@@ -13,6 +13,7 @@ services:
       - "traefik.enable=true"
       - "traefik.http.routers.kitchenowl.rule=Host(`your.domain.here`)"
       - "traefik.http.routers.kitchenowl.entrypoints=websecure"
+      - "traefik.http.routers.kitchenowl.tls.certresolver=myresolver"
       - "traefik.http.routers.kitchenowl.middlewares=security@docker" # Use to apply security middlewares
       - "traefik.http.middlewares.security.headers.addvaryheader=true"
       - "traefik.http.middlewares.security.headers.sslredirect=true"
