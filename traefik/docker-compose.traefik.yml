@@ -4,7 +4,6 @@ services:
     container_name: traefik
     image: traefik:latest
     restart: unless-stopped
-    user: "1000:1000"
     # Enables the web UI and tells Traefik to listen to docker
     command: 
       - --global.checkNewVersion=false
@@ -19,9 +18,10 @@ services:
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
       - --entrypoints.websecure.address=:443
-      - --certificatesresolvers.mydnschallenge.acme.email={E-MAIL}
-      - --certificatesresolvers.mydnschallenge.acme.storage=/letsencrypt/acme.json
-      - --certificatesresolvers.mydnschallenge.acme.httpchallenge.entrypoint=web
+      - --certificatesresolvers.myresolver.acme.email={E-MAIL}
+      - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
+      - --certificatesresolvers.myresolver.acme.tlschallenge=true
+      - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
     ports:
       # The HTTP port
       - "80:80"
