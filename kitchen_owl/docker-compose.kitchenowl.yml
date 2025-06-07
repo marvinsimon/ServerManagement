@@ -36,7 +36,4 @@ services:
       - FRONT_URL=https://your.domain.here
       - JWT_SECRET_KEY=PLEASE_CHANGE_ME
     volumes:
-      - kitchenowl_data:/data
-
-volumes:
-  kitchenowl_data:
+      - ./data:/data
