@@ -1,5 +1,3 @@
-version: "3"
-
 services:
   front:
     image: tombursch/kitchenowl-web:latest
