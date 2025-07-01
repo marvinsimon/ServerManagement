@@ -32,6 +32,6 @@ services:
     restart: unless-stopped
     environment:
       - FRONT_URL=https://your.domain.here
-      - JWT_SECRET_KEY=PLEASE_CHANGE_ME
+      - JWT_SECRET_KEY=/run/secrets/db-password
     volumes:
       - ./kitchen_owl/data:/data

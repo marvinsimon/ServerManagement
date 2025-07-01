@@ -3,7 +3,7 @@ volumes:
   letsencrypt:
 secrets:
   db-password:
-    file: ./db/password.txt
+    file: ./kitchen_owl/password.txt
 networks:
   entry:
     name: Entry
