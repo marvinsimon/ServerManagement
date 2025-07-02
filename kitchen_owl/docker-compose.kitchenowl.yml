@@ -7,7 +7,7 @@ services:
       - processing
     restart: unless-stopped
     depends_on:
-      - back_kitchenowl
+      - back
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.kitchenowl.rule=Host(`your.domain.here`)"
@@ -25,7 +25,7 @@ services:
       - "traefik.http.middlewares.security.headers.customframeoptionsvalue=SAMEORIGIN"
       - "traefik.http.middlewares.security.headers.referrerpolicy=same-origin"
 
-  back_kitchenowl:
+  back:
     image: tombursch/kitchenowl:latest
     container_name: kitchenowl_server
     networks:
