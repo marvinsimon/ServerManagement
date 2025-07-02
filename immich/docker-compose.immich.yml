@@ -37,6 +37,7 @@ services:
       traefik.http.routers.immich.entrypoints: websecure
       traefik.http.routers.immich.rule: Host(`immich.your-domain.com`)
       traefik.http.services.immich.loadbalancer.server.port: 2283
+      traefik.http.routers.immich.tls.certresolver: myresolver
 
 
   immich-machine-learning:
