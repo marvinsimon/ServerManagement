@@ -1,12 +1,12 @@
 services:
-  front:
+  front_kitchenowl:
     image: tombursch/kitchenowl-web:latest
     networks:
       - entry
       - processing
     restart: unless-stopped
     depends_on:
-      - back
+      - back_kitchenowl
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.kitchenowl.rule=Host(`your.domain.here`)"
@@ -24,7 +24,7 @@ services:
       - "traefik.http.middlewares.security.headers.customframeoptionsvalue=SAMEORIGIN"
       - "traefik.http.middlewares.security.headers.referrerpolicy=same-origin"
 
-  back:
+  back_kitchenowl:
     image: tombursch/kitchenowl:latest
     networks:
       - default
