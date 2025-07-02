@@ -1,5 +1,4 @@
 volumes:
-  db-data:
   letsencrypt:
 secrets:
   db-password:
