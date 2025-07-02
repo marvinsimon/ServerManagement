@@ -1,5 +1,6 @@
 services:
   front_kitchenowl:
+    container_name: kitchenowl_frontend
     image: tombursch/kitchenowl-web:latest
     networks:
       - entry
@@ -26,6 +27,7 @@ services:
 
   back_kitchenowl:
     image: tombursch/kitchenowl:latest
+    container_name: kitchenowl_server
     networks:
       - default
       - processing

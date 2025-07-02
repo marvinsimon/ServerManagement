@@ -1,6 +1,7 @@
 services:
   actual_server:
     image: docker.io/actualbudget/actual-server:latest
+    container_name: actual_server
     volumes:
       - ./actual/data:/data
     restart: unless-stopped
