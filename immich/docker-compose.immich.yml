@@ -29,7 +29,7 @@ services:
     healthcheck:
       disable: false
     networks:
-      - Entry
+      - entry
     labels:
       traefik.enable: true
       # increase readingTimeouts for the entrypoint used here
