@@ -18,6 +18,10 @@ services:
       - --entrypoints.web.http.redirections.entrypoint.to=websecure
       - --entrypoints.web.http.redirections.entrypoint.scheme=https
       - --entrypoints.websecure.address=:443
+      # Add higher timeouts because of immich
+      - --entrypoints.websecure.transport.respondingTimeouts.readTimeout=120s
+      - --entrypoints.websecure.transport.respondingTimeouts.idleTimeout=120s
+      - --entrypoints.websecure.transport.respondingTimeouts.writeTimeout=120s
       - --certificatesresolvers.myresolver.acme.email={E-MAIL}
       - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
       - --certificatesresolvers.myresolver.acme.tlschallenge=true
