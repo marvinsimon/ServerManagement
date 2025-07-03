@@ -33,6 +33,8 @@ services:
       - redisdata:/data
     healthcheck:
       test: redis-cli ping || exit 1
+    networks:
+      - paperless
   db:
     image: docker.io/library/postgres:17
     restart: unless-stopped
@@ -65,5 +67,6 @@ services:
       traefik.http.routers.paperless.tls.certresolver: myresolver
     networks:
       - entry
+      - paperless
 volumes:
   redisdata:
