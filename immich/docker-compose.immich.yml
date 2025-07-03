@@ -21,7 +21,7 @@ services:
       - ${UPLOAD_LOCATION}:/usr/src/app/upload
       - /etc/localtime:/etc/localtime:ro
     env_file:
-      - .env
+      - ./immich.env
     depends_on:
       - redis
       - database
@@ -51,7 +51,7 @@ services:
     volumes:
       - model-cache:/cache
     env_file:
-      - .env
+      - ./immich.env
     restart: always
     healthcheck:
       disable: false
