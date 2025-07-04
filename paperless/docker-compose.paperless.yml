@@ -27,6 +27,7 @@
 
 services:
   broker:
+    container_name: Paperless_Redis
     image: docker.io/library/redis:8
     restart: unless-stopped
     volumes:
@@ -36,6 +37,7 @@ services:
     networks:
       - default
   db:
+    container_name: Paperless_Postgres
     image: docker.io/library/postgres:17
     restart: unless-stopped
     volumes:
@@ -45,6 +47,7 @@ services:
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: CHANGE_ME
   webserver:
+    container_name: Paperless_Webserver
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
     restart: unless-stopped
     depends_on:
