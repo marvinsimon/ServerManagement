@@ -6,4 +6,4 @@ docker compose -f docker-compose.yml \
     -f paperless/docker-compose.paperless.yml \
     --env-file paperless/paperless.env \
     --env-file immich/immich.env \
-    pull -d
+    pull
