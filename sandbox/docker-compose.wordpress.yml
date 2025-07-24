@@ -35,7 +35,6 @@ services:
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.wordpress.rule=Host(`${WORDPRESS_HOSTNAME}`)"
-      - "traefik.http.routers.wordpress.service=wordpress"
       - "traefik.http.routers.wordpress.entrypoints=websecure"
       - "traefik.http.services.wordpress.loadbalancer.server.port=8080"
       - "traefik.http.routers.wordpress.tls=true"
