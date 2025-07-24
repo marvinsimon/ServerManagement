@@ -4,7 +4,7 @@ services:
     image: tombursch/kitchenowl-web:latest
     networks:
       - entry
-      - processing
+      - default
     restart: unless-stopped
     depends_on:
       - back
@@ -13,6 +13,7 @@ services:
       - "traefik.http.routers.kitchenowl.rule=Host(`your.domain.here`)"
       - "traefik.http.routers.kitchenowl.entrypoints=websecure"
       - "traefik.http.routers.kitchenowl.tls.certresolver=myresolver"
+      - "traefik.http.services.kitchenowl.loadbalancer.server.port=8080"
       - "traefik.http.routers.kitchenowl.middlewares=security@docker" # Use to apply security middlewares
 
 
@@ -21,7 +22,6 @@ services:
     container_name: kitchenowl_server
     networks:
       - default
-      - processing
     restart: unless-stopped
     environment:
       - FRONT_URL=https://your.domain.here
