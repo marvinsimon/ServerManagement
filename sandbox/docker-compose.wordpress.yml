@@ -39,7 +39,7 @@ services:
       - "traefik.http.routers.wordpress.entrypoints=websecure"
       - "traefik.http.services.wordpress.loadbalancer.server.port=8080"
       - "traefik.http.routers.wordpress.tls=true"
-      - "traefik.http.routers.wordpress.tls.certresolver=letsencrypt"
+      - "traefik.http.routers.wordpress.tls.certresolver=myresolver"
       - "traefik.http.services.wordpress.loadbalancer.passhostheader=true"
       - "traefik.http.routers.wordpress.middlewares=compresstraefik"
       - "traefik.http.middlewares.compresstraefik.compress=true"
