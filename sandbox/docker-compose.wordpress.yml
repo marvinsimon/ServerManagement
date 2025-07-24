@@ -51,6 +51,7 @@ services:
 
   mariadb:
     image: ${WORDPRESS_MARIADB_IMAGE_TAG}
+    container_name: wordpress_db
     volumes:
       - ./sandbox/maria_db:/var/lib/mysql
     networks:
