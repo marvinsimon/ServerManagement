@@ -1,5 +1,3 @@
-volumes:
-  letsencrypt:
 secrets:
   db-password:
     file: ./kitchen_owl/password.txt

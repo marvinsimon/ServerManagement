@@ -52,7 +52,7 @@ services:
   mariadb:
     image: ${WORDPRESS_MARIADB_IMAGE_TAG}
     volumes:
-      - mariadb-data:/var/lib/mysql
+      - ./sandbox/maria_db:/var/lib/mysql
     environment:
       MARIADB_DATABASE: ${WORDPRESS_DB_NAME}
       MARIADB_USER: ${WORDPRESS_DB_USER}
