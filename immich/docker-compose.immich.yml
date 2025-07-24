@@ -39,6 +39,8 @@ services:
       traefik.http.services.immich.loadbalancer.server.port: 2283
       traefik.http.routers.immich.tls.certresolver: myresolver
       traefik.http.routers.immich.tls: true
+      traefik.http.routers.immich.middlewares: security@docker # Use to apply security middlewares
+
 
 
   immich-machine-learning:

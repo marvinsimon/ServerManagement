@@ -68,6 +68,8 @@ services:
       traefik.http.routers.paperless.rule: Host(`paperless.your-domain.com`)
       traefik.http.services.paperless.loadbalancer.server.port: 8000
       traefik.http.routers.paperless.tls.certresolver: myresolver
+      traefik.http.routers.paperless.middlewares: security@docker # Use to apply security middlewares
+
     networks:
       - entry
       - default

@@ -42,6 +42,8 @@ services:
       - "traefik.http.services.wordpress.loadbalancer.passhostheader=true"
       - "traefik.http.routers.wordpress.middlewares=compresstraefik"
       - "traefik.http.middlewares.compresstraefik.compress=true"
+      - "traefik.http.routers.wordpress.middlewares=security@docker" # Use to apply security middlewares
+
     restart: unless-stopped
     depends_on:
       mariadb:
