@@ -1,5 +1,6 @@
 services:
   openwebui:
+    container_name: openweb_ui
     image: ghcr.io/open-webui/open-webui:main
     volumes:
       - open-webui:/app/backend/data
@@ -12,5 +13,7 @@ services:
       traefik.http.routers.openwebui.tls.certresolver: myresolver
       traefik.http.routers.openwebui.tls: true
       traefik.http.routers.openwebui.middlewares: security@docker # Use to apply security middlewares
+    networks:
+      - entry
 volumes:
   open-webui:
