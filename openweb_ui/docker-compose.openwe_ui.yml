@@ -1,0 +1,16 @@
+services:
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    volumes:
+      - open-webui:/app/backend/data
+    labels:
+      traefik.enable: true
+      # increase readingTimeouts for the entrypoint used here
+      traefik.http.routers.openwebui.entrypoints: websecure
+      traefik.http.routers.openwebui.rule: Host(`chat.your-domain.com`)
+      traefik.http.services.openwebui.loadbalancer.server.port: 8080
+      traefik.http.routers.openwebui.tls.certresolver: myresolver
+      traefik.http.routers.openwebui.tls: true
+      traefik.http.routers.openwebui.middlewares: security@docker # Use to apply security middlewares
+volumes:
+  open-webui:
