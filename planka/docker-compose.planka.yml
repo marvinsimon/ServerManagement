@@ -36,7 +36,6 @@ services:
       - db-data:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=planka
-      - POSTGRES_HOST_AUTH_METHOD=trust
     networks:
       - default
     healthcheck:
