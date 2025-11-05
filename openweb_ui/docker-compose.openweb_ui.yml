@@ -15,11 +15,16 @@ services:
       traefik.http.routers.openwebui.middlewares: security@docker # Use to apply security middlewares
     networks:
       - entry
+      - internal
     restart: unless-stopped
 
   ollama:
     container_name: ollama
     image: ollama/ollama:latest
     restart: unless-stopped
+    networks:
+      - internal
 volumes:
   open-webui:
+networks:
+  internal:
