@@ -1,0 +1,53 @@
+services:
+  planka:
+    container_name: Planka
+    image: ghcr.io/plankanban/planka:2.0.0-rc.4
+    restart: on-failure
+    volumes:
+      - favicons:/app/public/favicons
+      - user-avatars:/app/public/user-avatars
+      - background-images:/app/public/background-images
+      - attachments:/app/private/attachments
+    # Optionally override this to your user/group
+    user: 1000:1000
+    # tmpfs:
+    #   - /app/.tmp:mode=770,uid=1000,gid=1000
+    env_file: ./planka/planka.env
+    labels:
+      traefik.enable: true
+      traefik.http.routers.planka.entrypoints: websecure
+      traefik.http.routers.planka.rule: Host(`planka.your-domain.com`)
+      traefik.http.services.planka.loadbalancer.server.port: 1337
+      traefik.http.routers.planka.tls.certresolver: myresolver
+      traefik.http.routers.planka.tls: true
+      traefik.http.routers.planka.middlewares: security@docker # Use to apply security middlewares
+    networks:
+      - entry
+      - default
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  postgres:
+    container_name: Planka_DB
+    image: postgres:16-alpine
+    restart: on-failure
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=planka
+      - POSTGRES_HOST_AUTH_METHOD=trust
+    networks:
+      - default
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d planka"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  favicons:
+  user-avatars:
+  background-images:
+  attachments:
+  db-data:

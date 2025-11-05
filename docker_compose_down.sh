@@ -6,7 +6,9 @@ docker compose -f docker-compose.yml \
     -f paperless/docker-compose.paperless.yml \
     -f sandbox/docker-compose.wordpress.yml \
     -f openweb_ui/docker-compose.openweb_ui.yml \
+    -f planka/docker-compose.planka.yml \
     --env-file paperless/paperless.env \
     --env-file immich/immich.env \
     --env-file sandbox/wordpress.env \
+    --env-file planka/planka.env \
     down
