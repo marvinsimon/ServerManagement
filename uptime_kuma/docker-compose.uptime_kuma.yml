@@ -1,0 +1,17 @@
+services:
+  uptime-kuma:
+    container_name: Uptime_Kuma
+    image: louislam/uptime-kuma:2
+    restart: unless-stopped
+    networks:
+      - entry
+    volumes:
+      - ./uptime_kuma/data:/app/data
+    labels:
+      traefik.enable: true
+      traefik.http.routers.uptime_kuma.entrypoints: websecure
+      traefik.http.routers.uptime_kuma.rule: Host(`uptime_kuma.your-domain.com`)
+      traefik.http.services.uptime_kuma.loadbalancer.server.port: 3001
+      traefik.http.routers.uptime_kuma.tls.certresolver: myresolver
+      traefik.http.routers.uptime_kuma.tls: true
+      traefik.http.routers.uptime_kuma.middlewares: security@docker # Use to apply security middlewares
