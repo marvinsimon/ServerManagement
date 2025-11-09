@@ -1,0 +1,25 @@
+services:
+  anubis:
+    image: ghcr.io/techarohq/anubis:main
+    container_name: Anubis
+    environment:
+      # Telling Anubis, where to listen for Traefik
+      - BIND=:8080
+      # Telling Anubis to do redirect — ensure there is a space after '='
+      - 'TARGET= '
+      # Specifies which domains Anubis is allowed to redirect to.
+      - REDIRECT_DOMAINS=example.com
+      # Should be the full external URL for Anubis (including scheme)
+      - PUBLIC_URL=https://anubis.example.com
+      # Should match your domain for proper cookie scoping
+      - COOKIE_DOMAIN=example.com
+    networks:
+      - entry
+    labels:
+      - traefik.enable=true # Enabling Traefik
+      - traefik.docker.network=entry # Telling Traefik which network to use
+      - traefik.http.routers.anubis.rule=Host(`anubis.example.com`) # Only Matching Requests for example.com
+      - traefik.http.routers.anubis.entrypoints=websecure # Listen on HTTPS
+      - traefik.http.services.anubis.loadbalancer.server.port=8080 # Telling Traefik where to receive requests
+      - traefik.http.routers.anubis.service=anubis # Telling Traefik to use the above specified port
+      - traefik.http.routers.anubis.tls.certresolver=myresolver # Telling Traefik to resolve a Cert for Anubis

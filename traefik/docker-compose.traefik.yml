@@ -52,6 +52,8 @@ services:
       - "traefik.http.middlewares.security.headers.stsseconds=63072000"
       - "traefik.http.middlewares.security.headers.customframeoptionsvalue=SAMEORIGIN"
       - "traefik.http.middlewares.security.headers.referrerpolicy=same-origin"
+      # Anubis middleware
+      - "traefik.http.middlewares.anubis.forwardauth.address=http://anubis:8080/.within.website/x/cmd/anubis/api/check"
     ports:
       # The HTTP port
       - "80:80"

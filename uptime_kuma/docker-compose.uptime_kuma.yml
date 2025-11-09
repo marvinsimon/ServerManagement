@@ -14,4 +14,4 @@ services:
       traefik.http.services.uptime_kuma.loadbalancer.server.port: 3001
       traefik.http.routers.uptime_kuma.tls.certresolver: myresolver
       traefik.http.routers.uptime_kuma.tls: true
-      traefik.http.routers.uptime_kuma.middlewares: security@docker # Use to apply security middlewares
+      traefik.http.routers.uptime_kuma.middlewares: security@docker, anubis@docker # Use to apply security middlewares

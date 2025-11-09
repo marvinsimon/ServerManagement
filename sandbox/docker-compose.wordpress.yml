@@ -40,7 +40,8 @@ services:
       - "traefik.http.services.wordpress.loadbalancer.passhostheader=true"
       - "traefik.http.routers.wordpress.middlewares=compresstraefik"
       - "traefik.http.middlewares.compresstraefik.compress=true"
-      - "traefik.http.routers.wordpress.middlewares=security@docker" # Use to apply security middlewares
+      - "traefik.http.routers.wordpress.middlewares=security@docker, anubis@docker" # Use to apply security middlewares
+      
     command: >
       /bin/bash -c "echo 'ServerName localhost' >> /etc/apache2/apache2.conf && docker-entrypoint.sh apache2-foreground"
     restart: unless-stopped

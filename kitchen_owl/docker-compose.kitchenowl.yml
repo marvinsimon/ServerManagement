@@ -14,7 +14,7 @@ services:
       - "traefik.http.routers.kitchenowl.entrypoints=websecure"
       - "traefik.http.routers.kitchenowl.tls.certresolver=myresolver"
       - "traefik.http.services.kitchenowl.loadbalancer.server.port=80"
-      - "traefik.http.routers.kitchenowl.middlewares=security@docker" # Use to apply security middlewares
+      - "traefik.http.routers.kitchenowl.middlewares=security@docker, anubis@docker" # Use to apply security middlewares
 
 
   back:
