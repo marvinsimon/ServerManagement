@@ -5,7 +5,7 @@ services:
     image: traefik:latest
     restart: unless-stopped
     # Enables the web UI and tells Traefik to listen to docker
-    command: 
+    command:
       - --global.checkNewVersion=false
       - --global.sendAnonymousUsage=false
       - --providers.docker=true
@@ -26,7 +26,7 @@ services:
       - --certificatesresolvers.myresolver.acme.email={E-MAIL}
       - --certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json
       - --certificatesresolvers.myresolver.acme.tlschallenge=true
-#     - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
+    #     - --certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.dashboard.rule=Host(`traefik.domain.com`)"
@@ -53,8 +53,8 @@ services:
       - "traefik.http.middlewares.security.headers.customframeoptionsvalue=SAMEORIGIN"
       - "traefik.http.middlewares.security.headers.referrerpolicy=same-origin"
       # Anubis middleware
-      - "traefik.http.middlewares.anubis.forwardauth.address=http://anubis:8080/x/cmd/anubis/api/check"
-      - "traefik.http.middlewares.anubis.forwardauth.trustForwardHeader=true"
+      - "traefik.http.middlewares.anubis.forwardauth.address=http://anubis:8080/.within.website/x/cmd/anubis/api/check"
+      # - "traefik.http.middlewares.anubis.forwardauth.trustForwardHeader=true"
 
     ports:
       # The HTTP port
@@ -70,4 +70,3 @@ services:
       - ./traefik/acme.json:/letsencrypt/acme.json
     networks:
       - entry
-

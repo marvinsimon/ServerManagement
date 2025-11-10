@@ -13,6 +13,7 @@ services:
       - PUBLIC_URL=https://anubis.example.com
       # Should match your domain for proper cookie scoping
       - COOKIE_DOMAIN=example.com
+      - SLOG_LEVEL=DEBUG
     networks:
       - entry
     labels:
