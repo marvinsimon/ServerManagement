@@ -23,3 +23,4 @@ services:
       - traefik.http.services.anubis.loadbalancer.server.port=8080 # Telling Traefik where to receive requests
       - traefik.http.routers.anubis.service=anubis # Telling Traefik to use the above specified port
       - traefik.http.routers.anubis.tls.certresolver=myresolver # Telling Traefik to resolve a Cert for Anubis
+      - traefik.http.routers.anubis.middlewares=security@docker # Use to apply security middlewares
