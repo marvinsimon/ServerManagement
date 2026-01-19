@@ -25,10 +25,10 @@ services:
       - entry
       - planka_internal
     depends_on:
-      postgres:
+      db_planka:
         condition: service_healthy
 
-  postgres:
+  db_planka:
     container_name: Planka_DB
     image: postgres:16-alpine
     restart: on-failure

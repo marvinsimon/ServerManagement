@@ -1,5 +1,5 @@
 services:
-  postgres:
+  db_memos:
     container_name: memos_db
     image: postgres:15
     environment:
@@ -15,7 +15,7 @@ services:
     container_name: memos
     image: neosmemo/memos:stable
     depends_on:
-      - postgres
+      - db_memos
     environment:
       - MEMOS_MODE=prod
       - MEMOS_DRIVER=postgres
