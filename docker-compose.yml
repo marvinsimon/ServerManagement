@@ -4,5 +4,3 @@ secrets:
 networks:
   entry:
     name: Entry
-  processing:
-    name: processing
