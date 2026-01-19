@@ -17,8 +17,9 @@ services:
     depends_on:
       - postgres
     environment:
+      - MEMOS_MODE=prod
       - MEMOS_DRIVER=postgres
-      - MEMOS_DSN=postgresql://memos:your-password@postgres:5432/memos
+      - MEMOS_DSN=postgresql://memos:your-password@postgres:5432/memos?sslmode=disable
     labels:
       - "traefik.enable=true"
       - "traefik.http.routers.memos.rule=Host(`memos.domain.here`)"
