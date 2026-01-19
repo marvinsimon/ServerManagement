@@ -23,7 +23,7 @@ services:
       traefik.http.routers.planka.middlewares: security@docker, anubis@docker # Use to apply security middlewares
     networks:
       - entry
-      - default
+      - planka_internal
     depends_on:
       postgres:
         condition: service_healthy
@@ -38,7 +38,7 @@ services:
       - POSTGRES_DB=planka
     env_file: ./planka/planka.env
     networks:
-      - default
+      - planka_internal
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres -d planka"]
       interval: 10s
@@ -51,3 +51,7 @@ volumes:
   background-images:
   attachments:
   db-data:
+
+networks:
+  planka_internal:
+    internal: true
