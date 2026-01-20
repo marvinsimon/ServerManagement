@@ -1,0 +1,18 @@
+services:
+  radicale:
+    image: ghcr.io/kozea/radicale:3.5.4
+    user: root
+    volumes:
+      - ./radicale/config:/etc/radicale:ro
+      - ./radicale/data:/var/lib/radicale
+    restart: unless-stopped
+    labels:
+      traefik.enable: true
+      traefik.http.routers.planka.entrypoints: websecure
+      traefik.http.routers.planka.rule: Host(`radicale.your-domain.com`)
+      traefik.http.services.planka.loadbalancer.server.port: 5232
+      traefik.http.routers.planka.tls.certresolver: myresolver
+      traefik.http.routers.planka.tls: true
+      traefik.http.routers.planka.middlewares: security@docker, anubis@docker # Use to apply security middlewares
+    networks:
+      - entry
