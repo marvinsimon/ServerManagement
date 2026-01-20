@@ -10,6 +10,7 @@ docker compose -f docker-compose.yml \
     -f uptime_kuma/docker-compose.uptime_kuma.yml \
     -f anubis/docker-compose.anubis.yml \
     -f memos/docker-compose.memos.yml \
+    -f radicale/docker-compose.radicale.yml \
     --env-file paperless/paperless.env \
     --env-file immich/immich.env \
     --env-file sandbox/wordpress.env \
