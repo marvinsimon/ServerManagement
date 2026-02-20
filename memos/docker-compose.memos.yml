@@ -9,7 +9,7 @@ services:
     volumes:
       - ./memos/data:/var/lib/postgresql/data
     networks:
-      - memos_internal
+      - memos
 
   memos:
     container_name: memos
@@ -30,7 +30,7 @@ services:
        traefik.http.routers.memos.middlewares: security@docker, anubis@docker # Use to apply security middlewares
     networks:
       - entry
-      - memos_internal
+      - memos
 networks:
-  memos_internal:
-    internal: true
+  memos:
+    name: memos

@@ -35,7 +35,7 @@ services:
     healthcheck:
       test: redis-cli ping || exit 1
     networks:
-      - default
+      - paperless
   db:
     container_name: Paperless_Postgres
     image: docker.io/library/postgres:17
@@ -46,6 +46,8 @@ services:
       POSTGRES_DB: paperless
       POSTGRES_USER: paperless
       POSTGRES_PASSWORD: CHANGE_ME
+    networks:
+      - paperless
   webserver:
     container_name: Paperless_Webserver
     image: ghcr.io/paperless-ngx/paperless-ngx:latest
@@ -69,9 +71,11 @@ services:
       traefik.http.services.paperless.loadbalancer.server.port: 8000
       traefik.http.routers.paperless.tls.certresolver: myresolver
       traefik.http.routers.paperless.middlewares: security@docker, anubis@docker # Use to apply security middlewares
-
     networks:
       - entry
-      - default
+      - paperless
 volumes:
   redisdata:
+networks:
+  paperless:
+    name: paperless

@@ -19,7 +19,7 @@ services:
       traefik.http.routers.openwebui.middlewares: security@docker, anubis@docker # Use to apply security middlewares
     networks:
       - entry
-      - internal
+      - openwebui
     restart: unless-stopped
 
   ollama:
@@ -30,8 +30,9 @@ services:
       - OLLAMA_NUM_PARALLEL=4
       - OLLAMA_MAX_LOADED_MODELS=3
     networks:
-      - internal
+      - openwebui
 volumes:
   open-webui:
 networks:
-  internal:
+  openwebui:
+    name: openweb_ui

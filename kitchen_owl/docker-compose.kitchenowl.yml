@@ -4,7 +4,7 @@ services:
     image: tombursch/kitchenowl-web:latest
     networks:
       - entry
-      - default
+      - kitchenowl
     restart: unless-stopped
     depends_on:
       - back
@@ -21,10 +21,14 @@ services:
     image: tombursch/kitchenowl:latest
     container_name: kitchenowl_server
     networks:
-      - default
+      - kitchenowl
     restart: unless-stopped
     environment:
       - FRONT_URL=https://your.domain.here
       - JWT_SECRET_KEY=/run/secrets/db-password
     volumes:
       - ./kitchen_owl/data:/data
+networks:
+  kitchenowl:
+    name: kitchenowl
+  
