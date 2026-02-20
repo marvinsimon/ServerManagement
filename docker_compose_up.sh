@@ -12,6 +12,5 @@ docker compose -f docker-compose.yml \
     -f radicale/docker-compose.radicale.yml \
     --env-file paperless/paperless.env \
     --env-file immich/immich.env \
-    --env-file sandbox/wordpress.env \
     --env-file planka/planka.env \
     up -d
