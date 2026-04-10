@@ -21,6 +21,7 @@ services:
       - joplin_db
     networks:
       - joplin
+      - entry
     restart: unless-stopped
     environment:
       - APP_PORT=22300
