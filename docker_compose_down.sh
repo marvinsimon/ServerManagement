@@ -10,7 +10,9 @@ docker compose -f docker-compose.yml \
     -f anubis/docker-compose.anubis.yml \
     -f memos/docker-compose.memos.yml \
     -f radicale/docker-compose.radicale.yml \
+    -f joplin/docker-compose.joplin.yml \
     --env-file paperless/paperless.env \
     --env-file immich/immich.env \
     --env-file planka/planka.env \
+    --env-file joplin/joplin.env \
     down

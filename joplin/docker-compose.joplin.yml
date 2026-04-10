@@ -1,0 +1,43 @@
+networks:
+  joplin:
+
+services:
+  joplin_db:
+    container_name: joplin_db
+    image: postgres:16
+    volumes:
+      - ./data/postgres:/var/lib/postgresql/data
+    networks:
+      - joplin
+    restart: unless-stopped
+    environment:
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_DB=${POSTGRES_DATABASE}
+  joplin_app:
+    container_name: joplin_app
+    image: joplin/server:latest
+    depends_on:
+      - joplin_db
+    networks:
+      - joplin
+    restart: unless-stopped
+    environment:
+      - APP_PORT=22300
+      - APP_BASE_URL=${APP_BASE_URL}
+      - DB_CLIENT=pg
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      - POSTGRES_DATABASE=${POSTGRES_DATABASE}
+      - POSTGRES_USER=${POSTGRES_USER}
+      - POSTGRES_PORT=${POSTGRES_PORT}
+      - POSTGRES_HOST=joplin_db
+      - TRANSCRIBE_ENABLED=${TRANSCRIBE_ENABLED}
+    labels:
+      traefik.enable: true
+      # increase readingTimeouts for the entrypoint used here
+      traefik.http.routers.joplin.entrypoints: websecure
+      traefik.http.routers.joplin.rule: Host(`joplin.your-domain.com`)
+      traefik.http.services.joplin.loadbalancer.server.port: 22300
+      traefik.http.routers.joplin.tls.certresolver: myresolver
+      traefik.http.routers.joplin.tls: true
+      traefik.http.routers.joplin.middlewares: security@docker, anubis@docker # Use to apply security middlewares
