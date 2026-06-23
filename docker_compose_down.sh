@@ -11,6 +11,7 @@ docker compose -f docker-compose.yml \
     -f memos/docker-compose.memos.yml \
     -f radicale/docker-compose.radicale.yml \
     -f joplin/docker-compose.joplin.yml \
+    -f owntrack/docker-compose.owntrack.yml \
     --env-file paperless/paperless.env \
     --env-file immich/immich.env \
     --env-file planka/planka.env \
