@@ -21,6 +21,8 @@ services:
       traefik.http.routers.planka.tls.certresolver: myresolver
       traefik.http.routers.planka.tls: true
       traefik.http.routers.planka.middlewares: security@docker, anubis@docker # Use to apply security middlewares
+      traefik.docker.network: entry
+
     networks:
       - entry
       - planka_internal
@@ -55,3 +57,4 @@ volumes:
 networks:
   planka_internal:
     internal: true
+    name: planka_internal
