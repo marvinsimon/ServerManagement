@@ -11,7 +11,7 @@ services:
 
 
       # Router
-      - traefik.http.routers.traccar.rule=Host(`tracking.example.com`)
+      - traefik.http.routers.traccar.rule=Host(`traccar.example.com`)
       - traefik.http.routers.traccar.entrypoints=websecure
       - traefik.http.routers.traccar.tls.certresolver=myresolver
 
