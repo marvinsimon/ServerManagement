@@ -30,6 +30,9 @@ services:
       - entry
     volumes:
       - ./owntrack/config.js:/usr/share/nginx/html/config/config.js:ro
+    environment:
+      SERVER_HOST: recorder
+      SERVER_PORT: 8083
     labels:
       - traefik.enable=true
       - traefik.http.routers.owntracks.rule=Host(`owntracks.example.com`)
