@@ -71,6 +71,8 @@ services:
       traefik.http.services.paperless.loadbalancer.server.port: 8000
       traefik.http.routers.paperless.tls.certresolver: myresolver
       traefik.http.routers.paperless.middlewares: security@docker, anubis@docker # Use to apply security middlewares
+      traefik.docker.network: entry
+
     networks:
       - entry
       - paperless
