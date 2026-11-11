@@ -1,0 +1,10 @@
+[Unit]
+Description=Borg backup for %i
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+User=REPLACE_WITH_USER
+EnvironmentFile=/etc/borg-backup/%i.env
+ExecStart=/REPLACE/WITH/REPOSITORY/PATH/backup/borg-backup.sh %i
