@@ -6,7 +6,6 @@ exec docker compose -f docker-compose.yml \
     -f actual/docker-compose.actual.yml \
     -f immich/docker-compose.immich.yml \
     -f paperless/docker-compose.paperless.yml \
-    -f openweb_ui/docker-compose.openweb_ui.yml \
     -f planka/docker-compose.planka.yml \
     -f uptime_kuma/docker-compose.uptime_kuma.yml \
     -f anubis/docker-compose.anubis.yml \
