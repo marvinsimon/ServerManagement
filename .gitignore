@@ -1,2 +1,3 @@
 .DS_*
 /backup/*.env
+/searxng/.env

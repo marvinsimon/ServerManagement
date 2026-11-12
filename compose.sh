@@ -14,6 +14,7 @@ exec docker compose -f docker-compose.yml \
     -f joplin/docker-compose.joplin.yml \
     -f dawarich/docker-compose.dawarich.yml \
     -f traccar/docker-compose.traccar.yml \
+    -f searxng/docker-compose.yml \
     --env-file paperless/paperless.env \
     --env-file immich/immich.env \
     --env-file planka/planka.env \
